@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS CSS CLOCK</title>
+</head>
+
+<body>
+    <div class="clock">
+        <div class="clock-face">
+            <div class="hand hour-hand"></div>
+            <div class="hand min-hand"></div>
+            <div class="hand sec-hand"></div>
+        </div>
+    </div>
+
+    <style>
+        html {
+            background: #018ded url(https://hdwallpaperim.com/wp-content/uploads/2017/08/22/335006-space-supernova.jpg);
+            background-size: cover;
+            font-family: 'helvetica neue';
+            text-align: center;
+            font-size: 10px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 2rem;
+            display: flex;
+            flex: 1;
+            min-height: 100vh;
+            align-items: center;
+        }
+
+        .clock {
+            width: 30rem;
+            height: 30rem;
+            border: solid 20px white;
+            border-radius: 50%;
+            margin: 50px auto;
+            padding: 2rem;
+            position: relative;
+            box-shadow:
+                0 0 0 4px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 3px #EFEFEF,
+                inset 0 0 10px black,
+                0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .clock-face {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform: translateY(-3px);
+        }
+
+        .hand {
+            width: 50%;
+            height: 6px;
+            background: black;
+            position: absolute;
+            top: 50%;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            transition: all 0.05s;
+            transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+        }
+    </style>
+
+    <script>
+
+        const secondHand = document.querySelector('.sec-hand');
+        const minuteHand = document.querySelector('.min-hand');
+        const hourHand = document.querySelector('.hour-hand');
+
+        function setDate() {
+            const now = new Date();
+
+            const second = now.getSeconds();
+            const minute = now.getMinutes();
+            const hour = now.getHours();
+
+            const secondDegree = ((second * 360) / 60) + 90;
+            const minuteDegree = ((minute * 360) / 60) + 90;
+            const hourDegree = ((hour * 360) / 12) + 90;
+
+            secondHand.style.transition = secondDegree !== 90 ?
+                'all  0.05s cubic-bezier(0.1, 2.7, 0.58, 1)' :
+                'none';
+
+            minuteHand.style.transition = secondDegree !== 90 ?
+                'all  0.05s cubic-bezier(0.1, 2.7, 0.58, 1)' :
+                'none';
+
+            hourHand.style.transition = secondDegree !== 90 ?
+                'all  0.05s cubic-bezier(0.1, 2.7, 0.58, 1)' :
+                'none';
+
+            secondHand.style.transform = `rotate(${secondDegree}deg)`;
+            minuteHand.style.transform = `rotate(${minuteDegree}deg)`;
+            hourHand.style.transform = `rotate(${hourDegree}deg)`;
+
+            console.log(secondHand.style.transition);
+        }
+        setInterval(setDate, 1000);
+    </script>
+</body>
+
+</html>
