@@ -57,22 +57,28 @@
 
         .panel1 {
             background-image: url(https://images.hdqwalls.com/wallpapers/ballet-dancer-girl-road-4k-g2.jpg);
+            background-position: center;
         }
 
         .panel2 {
-            background-image: url(https://i.pinimg.com/originals/70/67/b1/7067b165f25480da36b6fa49a4c08567.jpg);
+            background-image: url(https://i.pinimg.com/originals/3c/b3/f5/3cb3f535140840f4b6b0ddf0cdb84e4f.jpg);
+            background-position: center;
+            /* filter: blur(2px); */
         }
 
         .panel3 {
             background-image: url(https://wallpaperaccess.com/full/911805.jpg);
+            background-position: center;
         }
 
         .panel4 {
             background-image: url(https://miro.medium.com/max/10368/1*uUTnD5RV8o7WPffXJttDWA.jpeg);
+            background-position: center;
         }
 
         .panel5 {
             background-image: url(https://www.ecoeureka.net/wp-content/uploads/2018/02/Ants-Download-Free-Backgrounds-HD.jpg);
+            background-position: center;
         }
 
         /* Flex Children */
@@ -132,6 +138,20 @@
                 font-size: 30px;
             }
         }
+
+        @media(max-width: 400px) {
+            .panel p {
+                font-size: 1em;
+            }
+
+            .panel p:nth-child(2) {
+                font-size: 1.5em;
+            }
+
+            .panel.open {
+                font-size: 20px;
+            }
+        }
     </style>
 
     <div class="panels">
@@ -141,7 +161,7 @@
             <p>Dance</p>
         </div>
         <div class="panel panel2">
-            <p>Give</p>
+            <p >Give</p>
             <p>Take</p>
             <p>Receive</p>
         </div>
