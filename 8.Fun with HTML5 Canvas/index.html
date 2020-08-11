@@ -12,7 +12,7 @@
         const canvas = document.querySelector('#draw');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-
+        console.log(canvas.getBoundingClientRect())
         const ctx = canvas.getContext('2d');
 
         ctx.strokeStyle = "#BADA55";
@@ -47,7 +47,7 @@
             }
             if (direction) {
                 ctx.lineWidth++;
-            }else{
+            } else {
                 ctx.lineWidth--;
             }
         }
@@ -60,7 +60,65 @@
         canvas.addEventListener('mouseup', () => isDrwaing = false);
         canvas.addEventListener('mouseout', () => isDrwaing = false);
 
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------
+        /* 
+            EVENTS REGARDING THE MOBILE PHONE (TOUCH EVENTS) WHICH INDIRECTLY CALLS THE MOUSE EVENTS
+         */
 
+
+        canvas.addEventListener('touchstart', (event) => {
+            [lastX, lastY] = [...getTouchPos(canvas, event)];
+            let touch = event.touches[0];
+            let mouseEvent = new MouseEvent("mousedown", {
+                clientX: touch.clientX,
+                clientY: touch.clientY,
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }, false);
+
+        canvas.addEventListener('touchend', (event) => {
+            let mouseEvent = new MouseEvent("mouseup", {});
+            canvas.dispatchEvent(mouseEvent);
+        }, false);
+
+        canvas.addEventListener('touchmove', event => {
+            let touch = event.touches[0];
+            let mouseEvent = new MouseEvent("mousemove", {
+                clientX: touch.clientX,
+                clientY: touch.clientY,
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }, false);
+
+        document.body.addEventListener("touchstart", function (e) {
+            if (e.target == canvas) {
+                e.preventDefault();
+            }
+        }, false);
+        document.body.addEventListener("touchend", function (e) {
+            if (e.target == canvas) {
+                e.preventDefault();
+            }
+        }, false);
+        document.body.addEventListener("touchmove", function (e) {
+            if (e.target == canvas) {
+                e.preventDefault();
+            }
+        }, false);
+
+        /* 
+            METHOD TO GET LASTX AND LASTY FOR MOBILE
+       */
+        function getTouchPos(canvasDom, touchEvent) {
+            var rect = canvasDom.getBoundingClientRect();
+            return [
+                touchEvent.touches[0].clientX - rect.left,
+                touchEvent.touches[0].clientY - rect.top
+            ];
+        }
     </script>
     <style>
         html,
